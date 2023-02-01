@@ -1,0 +1,4 @@
+INSERT INTO `littlelemondb`.`bookings` (`BookingID`, `TableNo`, `BookingSlot`, `BookingDate`, `StaffID`, `CustomerID`) VALUES ('1', '5', '11', '2022-10-10', '1', '1');
+INSERT INTO `littlelemondb`.`bookings` (`BookingID`, `TableNo`, `BookingSlot`, `BookingDate`, `StaffID`, `CustomerID`) VALUES ('2', '3', '11', '2022-11-12', '2', '3');
+INSERT INTO `littlelemondb`.`bookings` (`BookingID`, `TableNo`, `BookingSlot`, `BookingDate`, `StaffID`, `CustomerID`) VALUES ('3', '2', '11', '2022-10-11', '2', '2');
+INSERT INTO `littlelemondb`.`bookings` (`BookingID`, `TableNo`, `BookingSlot`, `BookingDate`, `StaffID`, `CustomerID`) VALUES ('4', '2', '11', '2022-10-13', '3', '1');

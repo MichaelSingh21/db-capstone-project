@@ -1,0 +1,18 @@
+USE `littlelemondb`;
+DROP procedure IF EXISTS `CancelBooking`;
+
+USE `littlelemondb`;
+DROP procedure IF EXISTS `littlelemondb`.`CancelBooking`;
+;
+
+DELIMITER $$
+USE `littlelemondb`$$
+CREATE DEFINER=`admin1`@`%` PROCEDURE `CancelBooking`(IN inBookingID INT)
+BEGIN
+	DELETE FROM bookings where BookingID = inBookingID;
+    SELECT CONCAT('Booking ',inBookingID,' cancelled.') as 'Confirmation';
+END$$
+
+DELIMITER ;
+;
+

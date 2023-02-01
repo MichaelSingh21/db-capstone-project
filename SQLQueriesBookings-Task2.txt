@@ -1,0 +1,9 @@
+CREATE PROCEDURE `CheckBooking` (IN bookingDate DATE, IN tableNumber int)
+BEGIN
+DECLARE AlreadyBooked INT DEFAULT 0;
+SELECT CASE 
+	WHEN COUNT(1) >= 1 THEN CONCAT("Table ",tableNumber," is already booked") 
+    ELSE CONCAT("Table ", tableNumber, " is available on ", bookingDate)
+    END as 'Booking status'
+FROM bookings where bookings.BookingDate = bookingDate AND bookings.TableNo = tableNumber;
+END

@@ -1,0 +1,30 @@
+USE `littlelemondb`;
+DROP procedure IF EXISTS `AddValidBooking`;
+
+USE `littlelemondb`;
+DROP procedure IF EXISTS `littlelemondb`.`AddValidBooking`;
+;
+
+DELIMITER $$
+USE `littlelemondb`$$
+CREATE DEFINER=`admin1`@`%` PROCEDURE `AddValidBooking`(in bookingDateRequested DATE, in tableRequested INT)
+BEGIN
+
+DECLARE AlreadyBooked INT DEFAULT 0;
+
+SELECT COUNT(1) INTO AlreadyBooked FROM bookings where BookingDate = bookingDateRequested AND TableNo = tableRequested;
+START TRANSACTION;
+INSERT INTO `littlelemondb`.`bookings` (`TableNo`, `BookingSlot`, `BookingDate`, `StaffID`, `CustomerID`) VALUES (tableRequested, '11', bookingDateRequested, '1', '1');
+
+IF AlreadyBooked > 0 THEN
+	SELECT CONCAT("Table ",tableRequested," is already booked - booking cancelled.") as 'Booking status';
+    ROLLBACK;
+ELSE
+	SELECT CONCAT("Table ",tableRequested," has been booked for ", bookingDateRequested, ".") as 'Booking status';
+	COMMIT;
+END IF;
+END$$
+
+DELIMITER ;
+;
+

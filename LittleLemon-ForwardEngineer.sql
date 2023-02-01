@@ -139,12 +139,20 @@ CREATE TABLE IF NOT EXISTS `LittleLemonDB`.`Bookings` (
   `BookingID` INT NOT NULL AUTO_INCREMENT,
   `TableNo` INT NOT NULL,
   `BookingSlot` TIME NOT NULL,
+  `BookingDate` DATE NOT NULL,
   `StaffID` INT NOT NULL,
+  `CustomerID` INT NOT NULL,
   PRIMARY KEY (`BookingID`),
   INDEX `fk_Bookings_Staff1_idx` (`StaffID` ASC) VISIBLE,
+  INDEX `fk_Bookings_Customer1_idx` (`CustomerID` ASC) VISIBLE,
   CONSTRAINT `fk_Bookings_Staff1`
     FOREIGN KEY (`StaffID`)
     REFERENCES `LittleLemonDB`.`Staff` (`StaffID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Bookings_Customer1`
+    FOREIGN KEY (`CustomerID`)
+    REFERENCES `LittleLemonDB`.`Customer` (`CustomerID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -158,8 +166,8 @@ DROP TABLE IF EXISTS `LittleLemonDB`.`Orders` ;
 CREATE TABLE IF NOT EXISTS `LittleLemonDB`.`Orders` (
   `OrderID` INT NOT NULL AUTO_INCREMENT,
   `TableNo` INT NOT NULL,
-  `BillAmount` INT NOT NULL,
   `Quantity` INT NOT NULL,
+  `Cost` DECIMAL NOT NULL,
   `BookingID` INT NOT NULL,
   `CustomerID` INT NOT NULL,
   `DeliveryStatusID` INT NOT NULL,
